@@ -1,7 +1,7 @@
 package com.example.moviemaster.di.network
 
 import com.example.moviemaster.common.constants.BASE_URL
-import com.example.moviemaster.data.remote.MovieService
+import com.example.moviemaster.data.remote.movies.api.MovieService
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

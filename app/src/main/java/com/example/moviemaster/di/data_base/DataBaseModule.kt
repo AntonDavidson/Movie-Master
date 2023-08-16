@@ -3,8 +3,8 @@ package com.example.moviemaster.di.data_base
 import android.content.Context
 import androidx.room.Room
 import com.example.moviemaster.common.constants.DB_NAME
-import com.example.moviemaster.data.local.MovieDao
-import com.example.moviemaster.data.local.MovieDatabase
+import com.example.moviemaster.data.local.dao.MovieDao
+import com.example.moviemaster.data.local.database.MovieDatabase
 
 import dagger.Module
 import dagger.Provides
