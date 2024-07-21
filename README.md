@@ -12,7 +12,7 @@ The app uses Retrofit to fetch data from The Movie Database (TMDB) API and displ
 ![Main Screen with Collapsed UI](screenshots/main_screen_collapsed_bar.png)  
 *Displays Latest and Popular Movies with Collapsed UI*
 
-![Movie Details](screenshots/movie_details.png)  
+![Movie Details](screenshots/details.png)  
 *Detailed Movie Information*
 
 ![Bottom Movie Details](screenshots/details_bottom.png)  
