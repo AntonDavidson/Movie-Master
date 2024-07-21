@@ -31,6 +31,7 @@ interface MovieService {
         @Path("movie_id") movieId: Long,
         @Query("api_key") key: String = BuildConfig.API_KEY
     ): ApiSingleMovieDetails
+    
     @GET("/3/movie/{movie_id}/credits")
     suspend fun getMovieCredits(
         @Path("movie_id") movieId: Long,
