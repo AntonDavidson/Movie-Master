@@ -50,10 +50,10 @@ fun BottomBar(
 
             Box(
                 modifier = Modifier
-                    .clip(shape = RoundedCornerShape(Corners.value))
+                    .clip(shape = RoundedCornerShape(Corners.size))
                     .background(
                         color = MaterialTheme.colorScheme.primary,
-                        shape = RoundedCornerShape(Corners.value)
+                        shape = RoundedCornerShape(Corners.size)
                     )
                     .align(Alignment.Center), contentAlignment = Alignment.Center
             ) {

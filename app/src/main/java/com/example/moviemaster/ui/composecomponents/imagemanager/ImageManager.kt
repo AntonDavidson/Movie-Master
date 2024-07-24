@@ -41,7 +41,7 @@ object ImageManager {
 
         Box(
             modifier = modifier
-                .clip(shape = CircleShape.copy(CornerSize(Corners.value)))
+                .clip(shape = CircleShape.copy(CornerSize(Corners.size)))
         ) {
             AsyncImage(
                 model = BASE_POSTER_PATH + posterPath,

@@ -69,11 +69,11 @@ fun MovieDetailsDialog(
         Column(
             Modifier
                 .fillMaxSize()
-                .clip(shape = RoundedCornerShape(Corners.value))
+                .clip(shape = RoundedCornerShape(Corners.size))
                 .verticalScroll(verticalScrollState)
                 .background(
                     MaterialTheme.colorScheme.surfaceContainer,
-                    shape = RoundedCornerShape(Corners.value)
+                    shape = RoundedCornerShape(Corners.size)
                 ),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
@@ -238,10 +238,10 @@ private fun Genre(movie: MovieDetailsDialogView) {
             Box(
                 modifier = Modifier
                     .padding(Padding.s)
-                    .clip(shape = RoundedCornerShape(Corners.value))
+                    .clip(shape = RoundedCornerShape(Corners.size))
                     .background(
                         color = MaterialTheme.colorScheme.primaryContainer,
-                        shape = RoundedCornerShape(Corners.value)
+                        shape = RoundedCornerShape(Corners.size)
                     )
             ) {
                 Text(

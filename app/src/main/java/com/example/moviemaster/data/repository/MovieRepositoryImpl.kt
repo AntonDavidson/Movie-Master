@@ -13,9 +13,6 @@ import com.example.moviemaster.domain.movies.model.images.Backdrop
 import com.example.moviemaster.domain.movies.model.movies.MovieDetails
 import com.example.moviemaster.domain.movies.model.movies.Movies
 import com.example.moviemaster.domain.movies.repository.MovieRepository
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.sync.Mutex
-import kotlinx.coroutines.sync.withLock
 import javax.inject.Inject
 
 class MovieRepositoryImpl @Inject constructor(
@@ -28,29 +25,24 @@ class MovieRepositoryImpl @Inject constructor(
     private val movieDataBaseMapper: MovieDataBaseMapper
 ) : MovieRepository {
 
-    private val mutex = Mutex()
-
-    private suspend fun <T> executeWithLock(block: suspend () -> T): T {
-        delay(300L)
-        return mutex.withLock { block() }
-    }
 
     suspend fun getFavoritesMovies(): List<MovieDetails> {
-        return executeWithLock {
-            movieDao.getAllMovies().map { movieDataBaseMapper.mapToDomain(it) }
-        }
+        return movieDao.getAllMovies().map { movieDataBaseMapper.mapToDomain(it) }
     }
 
     suspend fun addMovieToFavorites(movieEntity: MovieEntity) {
-        executeWithLock {
-            movieDao.addMovie(movieEntity)
-        }
+        movieDao.addMovie(movieEntity)
+
     }
 
     suspend fun removeMovieFromFavorites(movieId: Long) {
-        executeWithLock {
-            movieDao.deleteMovie(movieId)
-        }
+
+        movieDao.deleteMovie(movieId)
+
+    }
+
+    suspend fun removeMovieAndUpdateFavorites(movieId: Long): List<MovieDetails> {
+        return movieDao.removeAndUpdate(movieId).map { movieDataBaseMapper.mapToDomain(it) }
     }
 
     suspend fun getMovies(category: String, page: Int): Movies {
@@ -71,7 +63,6 @@ class MovieRepositoryImpl @Inject constructor(
 
 
     suspend fun checkFavorites(movieId: Long): Boolean {
-
         val favoritesMovie = movieDao.getMovieById(movieId)
         return favoritesMovie != null
     }

@@ -53,8 +53,8 @@ private fun ExpandedTopBar(
         modifier = Modifier
             .clip(
                 RoundedCornerShape(
-                    bottomEndPercent = Corners.value.value.toInt(),
-                    bottomStartPercent = Corners.value.value.toInt()
+                    bottomEndPercent = Corners.size.value.toInt(),
+                    bottomStartPercent = Corners.size.value.toInt()
                 )
             )
             .background(
@@ -80,7 +80,7 @@ private fun ExpandedTopBar(
 @Composable
 private fun TopBarCategory(movieCategory: MovieCategory, onCategoryClicked: (String) -> Unit) {
     Button(modifier = Modifier
-        .clip(CircleShape.copy(CornerSize(Corners.value)))
+        .clip(CircleShape.copy(CornerSize(Corners.size)))
         .padding(Padding.l),
         elevation = ButtonDefaults.buttonElevation(10.dp),
         colors = ButtonDefaults.buttonColors(

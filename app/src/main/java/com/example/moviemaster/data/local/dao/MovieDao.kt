@@ -4,20 +4,29 @@ import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
+import androidx.room.Transaction
 import com.example.moviemaster.common.constants.DB_NAME
 import com.example.moviemaster.data.local.entity.MovieEntity
 
 @Dao
-interface MovieDao {
+abstract class MovieDao {
     @Insert(onConflict = OnConflictStrategy.IGNORE)
-    suspend fun addMovie(movieEntity: MovieEntity)
+    abstract suspend fun addMovie(movieEntity: MovieEntity)
 
     @Query("DELETE FROM $DB_NAME WHERE id = :movieId")
-    suspend fun deleteMovie(movieId: Long)
+    abstract suspend fun deleteMovie(movieId: Long)
 
     @Query("SELECT * FROM $DB_NAME ")
-    suspend fun getAllMovies(): List<MovieEntity>
+    abstract suspend fun getAllMovies(): List<MovieEntity>
 
     @Query("SELECT * FROM $DB_NAME WHERE id = :id")
-    suspend fun getMovieById(id: Long): MovieEntity?
+    abstract suspend fun getMovieById(id: Long): MovieEntity?
+
+
+    @Transaction
+    @Query("SELECT * FROM $DB_NAME ")
+    suspend fun removeAndUpdate(movieId: Long): List<MovieEntity> {
+        deleteMovie(movieId)
+        return getAllMovies()
+    }
 }

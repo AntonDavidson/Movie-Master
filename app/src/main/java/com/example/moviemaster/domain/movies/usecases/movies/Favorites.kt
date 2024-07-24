@@ -10,24 +10,33 @@ import javax.inject.Inject
 
 
 class Favorites @Inject constructor(
-    private val movieRepositoryImpl: MovieRepositoryImpl,
+    private val movieRepository: MovieRepositoryImpl,
     private val domainMovieMapper: DomainMovieMapper,
     private val mainViewMapper: MainViewMapper
 ) {
 
     suspend fun getMovies(): MoviesMainView {
         return mainViewMapper.mapToView(
-            Movies(results = movieRepositoryImpl.getFavoritesMovies())
+            Movies(results = movieRepository.getFavoritesMovies())
         )
     }
 
     suspend fun addMovie(movieDetailsMainView: MovieDetailsMainView) {
-        movieRepositoryImpl.addMovieToFavorites(domainMovieMapper.mapToDataBase(movieDetailsMainView))
+        movieRepository.addMovieToFavorites(domainMovieMapper.mapToDataBase(movieDetailsMainView))
     }
 
     suspend fun removeMovie(movieId: Long) {
-        movieRepositoryImpl.removeMovieFromFavorites(movieId = movieId)
+        movieRepository.removeMovieFromFavorites(movieId = movieId)
     }
 
+    suspend fun removeMovieAndUpdateFavorites(movieId: Long): MoviesMainView {
+        return mainViewMapper.mapToView(
+            Movies(
+                results = movieRepository.removeMovieAndUpdateFavorites(
+                    movieId
+                )
+            )
+        )
+    }
 }
 

@@ -43,7 +43,7 @@ class MoviesViewModel @Inject constructor(
             }
 
             is MainMoviesEvent.GetFavoriteMainMovies -> {
-                getFavorites(false)
+                getFavorites()
             }
 
             is MainMoviesEvent.AddToFavorites -> {
@@ -53,7 +53,7 @@ class MoviesViewModel @Inject constructor(
             is MainMoviesEvent.RemoveFromFavorites -> {
                 removeMovieFromFavorites(movieEvent.movieId)
                 if (movies.value.category === MovieCategory.FAVORITES.displayName) {
-                    getFavorites(true)
+                  removeMovieAndUpdateFavorites(movieEvent.movieId)
                 }
             }
 
@@ -96,12 +96,11 @@ class MoviesViewModel @Inject constructor(
     }
 
 
-    private fun getFavorites(isFavoritesScreen: Boolean) {
+    private fun getFavorites() {
         viewModelScope.launch(Dispatchers.IO) {
 
-            if (!isFavoritesScreen) {
-                moviesState.apply { emit(value.copy(loading = true)) }
-            }
+
+            moviesState.apply { emit(value.copy(loading = true)) }
             moviesState.apply {
                 emit(
                     value.copy(
@@ -125,6 +124,20 @@ class MoviesViewModel @Inject constructor(
     private fun removeMovieFromFavorites(movieId: Long) {
         viewModelScope.launch(Dispatchers.IO) {
             favorites.removeMovie(movieId)
+        }
+    }
+
+    private fun removeMovieAndUpdateFavorites(movieId: Long) {
+        viewModelScope.launch(Dispatchers.IO) {
+            moviesState.apply {
+                emit(
+                    value.copy(
+                        loading = false,
+                        category = MovieCategory.FAVORITES.displayName,
+                        movies = favorites.removeMovieAndUpdateFavorites(movieId)
+                    )
+                )
+            }
         }
     }
 
