@@ -1,11 +1,14 @@
 package com.example.moviemaster.ui.composecomponents.moviesgrid
 
+import androidx.compose.foundation.Canvas
+import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyGridState
@@ -15,6 +18,8 @@ import androidx.compose.foundation.lazy.grid.rememberLazyGridState
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.material3.Icon
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
@@ -24,8 +29,10 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalConfiguration
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.example.moviemaster.ui.composecomponents.animation.MultiStateAnimationCircleFilledCanvas
 import com.example.moviemaster.ui.composecomponents.buttons.IconButton
 import com.example.moviemaster.ui.composecomponents.imagemanager.ImageManager.LoadImageFromNetwork
 import com.example.moviemaster.ui.model.MovieDetailsMainView
@@ -52,22 +59,25 @@ fun MoviesGrid(
         hideUI(it)
         currentGridIndex.intValue = moviesGridState.firstVisibleItemIndex
     }
-
-    LazyVerticalGrid(
-        modifier = Modifier
-            .fillMaxSize()
-            .padding(Padding.xs),
-        state = moviesGridState,
-        columns = GridCells.Fixed(2),
-        content = {
-            itemsIndexed(movies) { index, movie ->
-                Movie(paddingValues, index, movie, event) {
-                    onMovieClicked(movie)
+    if (movies.isNotEmpty()) {
+        LazyVerticalGrid(
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(Padding.xs),
+            state = moviesGridState,
+            columns = GridCells.Fixed(2),
+            content = {
+                itemsIndexed(movies) { index, movie ->
+                    Movie(paddingValues, index, movie, event) {
+                        onMovieClicked(movie)
+                    }
                 }
-            }
 
 
-        })
+            })
+    } else {
+        EmptyMoviesList()
+    }
 }
 
 @Composable
@@ -149,6 +159,25 @@ private fun gridOperator(
 }
 
 
+@Composable
+fun EmptyMoviesList() {
+    Box(
+        modifier = Modifier
+            .fillMaxSize()
+            .background(MaterialTheme.colorScheme.surface),
+        contentAlignment = Alignment.Center
+    ) {
+      MultiStateAnimationCircleFilledCanvas()
+        Text(
+            text = "Empty Movie List!",
+            style = MaterialTheme.typography.headlineLarge.copy(
+                textAlign = TextAlign.Center,
+                color = MaterialTheme.colorScheme.onPrimary
+            )
+        )
+    }
+}
+
 @Preview
 @Composable
 fun MoviesGridPreview() {
@@ -157,9 +186,6 @@ fun MoviesGridPreview() {
         posterPath = "",
         id = 123
     )
-
-
-
     MovieMasterTheme {
         MoviesGrid(paddingValues = PaddingValues(Padding.s), movies = listOf(
             mockMovieDetails,
@@ -170,6 +196,19 @@ fun MoviesGridPreview() {
             mockMovieDetails,
             mockMovieDetails
         ), hideUI = {}, event = {}, onMovieClicked = {})
+    }
+}
+
+@Preview(showBackground = true)
+@Composable
+fun EmptyMoviesGridPreview() {
+    MovieMasterTheme {
+        MoviesGrid(
+            paddingValues = PaddingValues(Padding.s),
+            movies = emptyList(),
+            hideUI = {},
+            event = {},
+            onMovieClicked = {})
     }
 }
 
