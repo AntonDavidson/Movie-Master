@@ -2,8 +2,8 @@ package com.example.moviemaster.domain.movies.usecases.cast
 
 import android.util.Log
 import com.example.moviemaster.data.repository.MovieRepositoryImpl
-import com.example.moviemaster.ui.moviedetails.mapper.ActorViewMapper
-import com.example.moviemaster.ui.moviedetails.model.ActorsDialogView
+import com.example.moviemaster.ui.movie_details.mapper.ActorViewMapper
+import com.example.moviemaster.ui.movie_details.model.ActorsDialogView
 import javax.inject.Inject
 private const val TAG="GetActors"
 class GetActors @Inject constructor(

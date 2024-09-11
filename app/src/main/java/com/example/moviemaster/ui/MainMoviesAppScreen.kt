@@ -17,16 +17,16 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.moviemaster.domain.movies.model.movies.MovieCategory
-import com.example.moviemaster.ui.composecomponents.bottombar.BottomBar
-import com.example.moviemaster.ui.composecomponents.moviesgrid.MoviesGrid
-import com.example.moviemaster.ui.composecomponents.topbar.TopBar
+import com.example.moviemaster.ui.compose_components.bottom_bar.BottomBar
+import com.example.moviemaster.ui.compose_components.movies_grid.MoviesGrid
+import com.example.moviemaster.ui.compose_components.top_bar.TopBar
 import com.example.moviemaster.ui.model.MovieDetailsMainView
 import com.example.moviemaster.ui.model.MoviesMainView
-import com.example.moviemaster.ui.moviedetails.MovieDetailsDialog
-import com.example.moviemaster.ui.moviedetails.detailsevent.MovieDetailsEvent
-import com.example.moviemaster.ui.moviedetails.detailstate.MovieDetailsState
-import com.example.moviemaster.ui.moviesevent.MainMoviesEvent
-import com.example.moviemaster.ui.moviesstate.MoviesState
+import com.example.moviemaster.ui.movie_details.MovieDetailsDialog
+import com.example.moviemaster.ui.movie_details.detailsevent.MovieDetailsEvent
+import com.example.moviemaster.ui.movie_details.detailstate.MovieDetailsState
+import com.example.moviemaster.ui.movies_event.MainMoviesEvent
+import com.example.moviemaster.ui.movies_state.MoviesState
 
 private const val TAG = "MainMoviesAppScreen"
 

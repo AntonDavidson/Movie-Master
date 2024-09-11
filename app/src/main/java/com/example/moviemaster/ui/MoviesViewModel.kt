@@ -7,8 +7,8 @@ import com.example.moviemaster.domain.movies.model.movies.MovieCategory
 import com.example.moviemaster.domain.movies.usecases.movies.Favorites
 import com.example.moviemaster.domain.movies.usecases.movies.GetMovies
 import com.example.moviemaster.ui.model.MovieDetailsMainView
-import com.example.moviemaster.ui.moviesevent.MainMoviesEvent
-import com.example.moviemaster.ui.moviesstate.MoviesState
+import com.example.moviemaster.ui.movies_event.MainMoviesEvent
+import com.example.moviemaster.ui.movies_state.MoviesState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
