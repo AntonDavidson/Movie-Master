@@ -25,7 +25,7 @@ import androidx.compose.ui.unit.dp
 import androidx.core.view.WindowCompat
 import com.example.moviemaster.ui.MainMoviesAppScreen
 import com.example.moviemaster.ui.MoviesViewModel
-import com.example.moviemaster.ui.moviedetails.MovieDetailsViewModel
+import com.example.moviemaster.ui.movie_details.MovieDetailsViewModel
 import com.example.moviemaster.ui.theme.MovieMasterTheme
 import dagger.hilt.android.AndroidEntryPoint
 

@@ -2,8 +2,8 @@ package com.example.moviemaster.domain.movies.usecases.movies
 
 import android.util.Log
 import com.example.moviemaster.data.repository.MovieRepositoryImpl
-import com.example.moviemaster.ui.moviedetails.mapper.DialogViewMapper
-import com.example.moviemaster.ui.moviedetails.model.MovieDetailsDialogView
+import com.example.moviemaster.ui.movie_details.mapper.DialogViewMapper
+import com.example.moviemaster.ui.movie_details.model.MovieDetailsDialogView
 import javax.inject.Inject
 
 private const val TAG = "GetSingleMovie"
